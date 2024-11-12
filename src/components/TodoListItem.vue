@@ -1,3 +1,7 @@
 <script setup></script>
-<template></template>
+<template>
+    <body>
+        <h1>This is an item</h1>
+    </body>
+</template>
 <style scoped></style>
