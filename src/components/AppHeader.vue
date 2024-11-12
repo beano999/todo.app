@@ -1,7 +1,7 @@
 <script setup></script>
 <template>
 <header>
-    <h1>This is the header</h1>
+    <h1 class ="headerTitle">ToDo.app</h1>
 </header>
 </template>
 <style scoped>
@@ -15,5 +15,13 @@ header {
 }
 h1 {
     color: #333333;
+}
+
+.headerTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0;
 }
 </style>

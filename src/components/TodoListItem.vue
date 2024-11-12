@@ -1,7 +1,18 @@
+import { TodoList.vue }
 <script setup></script>
 <template>
-    <body>
-        <h1>This is an item</h1>
-    </body>
+    <main>
+        <div class ="itemHolder">
+            <h1 id ="todoTitle">.</h1>
+        </div>
+    </main>
 </template>
-<style scoped></style>
+<style scoped>
+.itemHolder {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: blue;
+
+}
+</style>
