@@ -28,4 +28,4 @@ npm run dev
 npm run build
 ```
 
-#not writing a readme for this
+# not writing a readme for this
