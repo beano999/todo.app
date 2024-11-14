@@ -11,7 +11,7 @@
 
   --vt-c-blurple: #7B56EB;
   --vt-c-purple: #A330EB;
-  --vt-c-pink: #FF7D93;
+  --vt-c-pink: #ee6b81;
   --vt-c-light-green: #79E58A;
   --vt-c-blue: #4188F0;
 
@@ -28,7 +28,7 @@
 
 /* semantic color variables for this project */
 :root {
-  --color-background: var(--vt-c-blurple);
+  --color-background: var(--vt-c-black-soft);
   --color-background-soft: var(--vt-c-purple);
   --color-background-mute: var(--vt-c-light-green);
 
@@ -36,7 +36,7 @@
   --color-border-hover: var(--vt-c-blue);
 
   --color-heading: var(--vt-c-light-green);
-  --color-text: var(--vt-c-pink);
+  --color-text: var(--vt-c-white-mute);
 
   --section-gap: 160px;
 }
