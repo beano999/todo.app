@@ -1,70 +1,77 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import TodoListItem from './TodoListItem.vue';
 
-// Reactive array to hold todos
-const todos = ref([]);
+const todos = ref(JSON.parse(localStorage.getItem('todos')) || []);
 
-// Function to create a new todo
+//this function creates a new todo by pushing a new object to the todos array and sets completed to false by default
+
 const createTodo = () => {
   todos.value.push({
-    id: todos.value.length + 1,
-    title: `New Todo #${todos.value.length + 1}`,
+    id: Date.now(),  // Unique ID
+    title: 'New Todo',
     completed: false,
   });
 };
 
-// Function to delete a todo
+// Update the title of a specific todo by finding the todo with the matching ID (which is date.now so that it is always unique)
+const updateTodo = (id, newTitle) => {
+  const todo = todos.value.find(todo => todo.id === id);
+  if (todo) {
+    todo.title = newTitle;
+  }
+};
+
+// Save to localStorage whenever todos change (this is so they don't disappear when the page is refreshed)
+watch(todos, () => {
+  localStorage.setItem('todos', JSON.stringify(todos.value));
+}, { deep: true });
+
+
+// Delete a todo by filtering out the todo with the matching ID (date.now)
 const deleteTodo = (id) => {
-//console.log('deleting: ', id);
   todos.value = todos.value.filter(todo => todo.id !== id);
-  //console.log('remaining todos: ' , todos.value);
 };
 </script>
 
 <template>
-  <main>
-    <div id="mainContainer" class="mainContainer">
-      <button class="createButton" id="createTodo" v-on:click="createTodo">Create a New ToDo</button>
-      
-      <TodoListItem 
-        v-for="todo in todos" 
-        :key="todo.id" 
-        :todo="todo" 
-        @delete-todo="deleteTodo" 
-      />
-    </div>
-  </main>
+  <div class="mainContainer">
+    <h2>COMP 206 - Assignment 2 - Ben Wartman</h2>
+    <button class = "createButton" @click="createTodo">Create a New ToDo</button>
+    <TodoListItem 
+      v-for="todo in todos" 
+      :key="todo.id" 
+      :todo="todo" 
+      @delete-todo="deleteTodo" 
+      @update-todo="updateTodo" 
+    />
+  </div>
 </template>
 
 <style scoped>
 .mainContainer {
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
-  justify-content: center;
-  border-radius: 10px;
+  align-items: center; 
+  padding: 20px;
   background-color: #454545;
+  border-radius: 10px;
+  margin: 20px;
 }
 
 .createButton {
   background-color: #2c9e30;
   border: none;
   color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
+  padding: 10px 20px;
+  margin: 20px 0;  
   font-size: 1.5rem;
-  margin-inline: 40px;
-  margin-block: 20px;
   cursor: pointer;
   border-radius: 10px;
-  font-family: monospace , sans-serif;
   transition: 0.3s;
 }
 
 .createButton:hover {
-  
   background-color: #225c25;
 }
 </style>
